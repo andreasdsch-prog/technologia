@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Project Showcase</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f0f23;
+      color: #e0e0e0;
+      min-height: 100%;
+      width: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #1a1a2e;
+      border-bottom: 2px solid #00d4ff;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 212, 255, 0.1);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      fill: #00d4ff;
+    }
+
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      min-width: 200px;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: #6b7280;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 3rem;
+      border: 1px solid #2d2d44;
+      border-radius: 8px;
+      background: #0f0f23;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #00d4ff;
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    }
+
+    .search-bar input::placeholder {
+      color: #6b7280;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #00d4ff #1a1a2e;
+    }
+
+    nav::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    nav::-webkit-scrollbar-track {
+      background: #1a1a2e;
+    }
+
+    nav::-webkit-scrollbar-thumb {
+      background: #00d4ff;
+      border-radius: 2px;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #9ca3af;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab:hover {
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+    }
+
+    .tab.active {
+      background: #00d4ff;
+      color: #0f0f23;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: #1a1a2e;
+      border: 1px solid #2d2d44;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #00d4ff;
+      box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
+    }
+
+    .project-thumbnail {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-thumbnail::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(0, 212, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 212, 255, 0.1) 75%, rgba(0, 212, 255, 0.1)),
+                  linear-gradient(45deg, rgba(0, 212, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 212, 255, 0.1) 75%, rgba(0, 212, 255, 0.1));
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      opacity: 0.3;
+    }
+
+    .project-card:nth-child(2n) .project-thumbnail {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .project-card:nth-child(3n) .project-thumbnail {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .project-card:nth-child(4n) .project-thumbnail {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .project-card:nth-child(5n) .project-thumbnail {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    .project-info {
+      padding: 1.25rem;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .project-author {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin: 0 0 1rem 0;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.25rem 0.75rem;
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #6b7280;
+    }
+
+    .empty-state-icon {
+      width: 80px;
+      height: 80px;
+      fill: #2d2d44;
+      margin: 0 auto 1.5rem;
+    }
+
+    .empty-state h2 {
+      font-size: 1.5rem;
+      color: #9ca3af;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .empty-state p {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2d2d44;
+    }
+
+    .about-content h2 {
+      color: #00d4ff;
+      font-size: 2rem;
+      margin: 0 0 1rem 0;
+    }
+
+    .about-content p {
+      line-height: 1.8;
+      color: #d1d5db;
+      margin: 0 0 1rem 0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .header-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-bar {
+        max-width: 100%;
+      }
+
+      .site-title {
+        font-size: 1.25rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper">
+   <header role="banner">
+    <div class="header-top">
+     <div class="logo-section">
+      <svg class="logo" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4V17c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V8.18l6-3zM11 9v6h2V9h-2zm0 8v2h2v-2h-2z" />
+      </svg>
+      <h1 class="site-title" id="site-title">Student HTML Project Showcase</h1>
+     </div>
+     <div class="search-bar">
+      <svg class="search-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+      </svg><label for="search-input" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">Search projects</label> <input type="text" id="search-input" placeholder="Search projects...">
+     </div>
+    </div>
+    <nav role="navigation" aria-label="Main navigation"><button class="tab active" data-tab="gallery" id="tab-gallery">Student Gallery</button> <button class="tab" data-tab="submissions" id="tab-submissions">Project Submissions</button> <button class="tab" data-tab="about" id="tab-about">About</button>
+    </nav>
+   </header>
+   <main role="main">
+    <div class="tab-content active" id="content-gallery">
+     <div class="projects-grid" id="gallery-grid">
+      <div class="project-card">
+       <div class="project-thumbnail">
+        🎨
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Interactive Portfolio</h2>
+        <p class="project-author">by Sarah Johnson</p>
+        <div class="project-tags"><span class="tag">CSS Grid</span> <span class="tag">Animations</span>
+        </div>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-thumbnail">
+        🎮
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Memory Game</h2>
+        <p class="project-author">by Alex Chen</p>
+        <div class="project-tags"><span class="tag">JavaScript</span> <span class="tag">Game Logic</span>
+        </div>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-thumbnail">
+        📱
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Weather Dashboard</h2>
+        <p class="project-author">by Maria Garcia</p>
+        <div class="project-tags"><span class="tag">Responsive</span> <span class="tag">API</span>
+        </div>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-thumbnail">
+        🍕
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Recipe Finder</h2>
+        <p class="project-author">by James Williams</p>
+        <div class="project-tags"><span class="tag">Search</span> <span class="tag">Cards</span>
+        </div>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-thumbnail">
+        ✍️
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Blog Platform</h2>
+        <p class="project-author">by Emma Davis</p>
+        <div class="project-tags"><span class="tag">Forms</span> <span class="tag">Layout</span>
+        </div>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-thumbnail">
+        🎵
+       </div>
+       <div class="project-info">
+        <h2 class="project-title">Music Player</h2>
+        <p class="project-author">by David Kim</p>
+        <div class="project-tags"><span class="tag">Audio</span> <span class="tag">Controls</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="content-submissions">
+     <div class="empty-state">
+      <svg class="empty-state-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+      </svg>
+      <h2>New Submissions Coming Soon</h2>
+      <p>Check back later for the latest student project submissions</p>
+     </div>
+    </div>
+    <div class="tab-content" id="content-about">
+     <div class="about-content">
+      <h2>About This Showcase</h2>
+      <p>Welcome to the Student HTML Project Showcase! This platform celebrates the creativity and technical skills of our coding students.</p>
+      <p>Here you'll find a diverse collection of web projects ranging from interactive games to practical web applications. Each project demonstrates fundamental HTML, CSS, and JavaScript concepts learned throughout our curriculum.</p>
+      <p>Students have the opportunity to showcase their work, receive feedback from peers, and gain inspiration from fellow developers. Browse through the gallery to see the amazing work our community has created!</p>
+     </div>
+    </div>
+   </main>
+  </div>
+  <script>
+    const defaultConfig = {
+      site_title: "Student HTML Project Showcase",
+      search_placeholder: "Search projects...",
+      tab1_label: "Student Gallery",
+      tab2_label: "Project Submissions",
+      tab3_label: "About",
+      background_color: "#0f0f23",
+      header_color: "#1a1a2e",
+      accent_color: "#00d4ff",
+      text_color: "#e0e0e0",
+      card_color: "#1a1a2e"
+    };
+
+    let config = defaultConfig;
+
+    async function onConfigChange(newConfig) {
+      config = { ...config, ...newConfig };
+
+      // Update text content
+      const siteTitle = document.getElementById('site-title');
+      if (siteTitle) {
+        siteTitle.textContent = config.site_title || defaultConfig.site_title;
+      }
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.placeholder = config.search_placeholder || defaultConfig.search_placeholder;
+      }
+
+      const tabGallery = document.getElementById('tab-gallery');
+      if (tabGallery) {
+        tabGallery.textContent = config.tab1_label || defaultConfig.tab1_label;
+      }
+
+      const tabSubmissions = document.getElementById('tab-submissions');
+      if (tabSubmissions) {
+        tabSubmissions.textContent = config.tab2_label || defaultConfig.tab2_label;
+      }
+
+      const tabAbout = document.getElementById('tab-about');
+      if (tabAbout) {
+        tabAbout.textContent = config.tab3_label || defaultConfig.tab3_label;
+      }
+
+      // Update colors
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const headerColor = config.header_color || defaultConfig.header_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const cardColor = config.card_color || defaultConfig.card_color;
+
+      document.body.style.background = backgroundColor;
+      document.body.style.color = textColor;
+
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.background = headerColor;
+        header.style.borderBottomColor = accentColor;
+      }
+
+      const logo = document.querySelector('.logo');
+      if (logo) {
+        logo.style.fill = accentColor;
+      }
+
+      const aboutH2 = document.querySelector('.about-content h2');
+      if (aboutH2) {
+        aboutH2.style.color = accentColor;
+      }
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.style.background = cardColor;
+      });
+
+      document.querySelectorAll('.tab.active').forEach(tab => {
+        tab.style.background = accentColor;
+        tab.style.color = backgroundColor;
+      });
+
+      const aboutContent = document.querySelector('.about-content');
+      if (aboutContent) {
+        aboutContent.style.background = cardColor;
+      }
+
+      const searchBar = document.querySelector('.search-bar input');
+      if (searchBar) {
+        searchBar.style.background = backgroundColor;
+        searchBar.style.color = textColor;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.card_color || defaultConfig.card_color,
+            set: (value) => {
+              config.card_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ card_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["site_title", config.site_title || defaultConfig.site_title],
+        ["search_placeholder", config.search_placeholder || defaultConfig.search_placeholder],
+        ["tab1_label", config.tab1_label || defaultConfig.tab1_label],
+        ["tab2_label", config.tab2_label || defaultConfig.tab2_label],
+        ["tab3_label", config.tab3_label || defaultConfig.tab3_label]
+      ]);
+    }
+
+    // Tab functionality
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
+
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(`content-${targetTab}`).classList.add('active');
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const projectCards = document.querySelectorAll('.project-card');
+
+      projectCards.forEach(card => {
+        const title = card.querySelector('.project-title').textContent.toLowerCase();
+        const author = card.querySelector('.project-author').textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || author.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4e6a8d7674fd6d',t:'MTc2NDIxMjg1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
