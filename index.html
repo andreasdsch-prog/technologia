@@ -177,12 +177,42 @@
       overflow: hidden;
       transition: all 0.3s ease;
       cursor: pointer;
+      text-decoration: none;
+      display: block;
     }
 
     .project-card:hover {
       transform: translateY(-4px);
       border-color: #00d4ff;
       box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
+    }
+
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #2d2d44;
+      color: #00d4ff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: gap 0.3s ease;
+    }
+
+    .project-card:hover .project-link {
+      gap: 0.75rem;
+    }
+
+    .link-icon {
+      width: 16px;
+      height: 16px;
+      fill: #00d4ff;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .link-icon {
+      transform: translateX(2px) translateY(-2px);
     }
 
     .project-thumbnail {
@@ -360,8 +390,7 @@
    </header>
    <main role="main">
     <div class="tab-content active" id="content-gallery">
-     <div class="projects-grid" id="gallery-grid">
-      <div class="project-card">
+     <div class="projects-grid" id="gallery-grid"><a href="https://codepen.io" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         🎨
        </div>
@@ -370,9 +399,11 @@
         <p class="project-author">by Sarah Johnson</p>
         <div class="project-tags"><span class="tag">CSS Grid</span> <span class="tag">Animations</span>
         </div>
-       </div>
-      </div>
-      <div class="project-card">
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a> <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         🎮
        </div>
@@ -381,9 +412,11 @@
         <p class="project-author">by Alex Chen</p>
         <div class="project-tags"><span class="tag">JavaScript</span> <span class="tag">Game Logic</span>
         </div>
-       </div>
-      </div>
-      <div class="project-card">
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a> <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         📱
        </div>
@@ -392,9 +425,11 @@
         <p class="project-author">by Maria Garcia</p>
         <div class="project-tags"><span class="tag">Responsive</span> <span class="tag">API</span>
         </div>
-       </div>
-      </div>
-      <div class="project-card">
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a> <a href="https://stackoverflow.com" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         🍕
        </div>
@@ -403,9 +438,11 @@
         <p class="project-author">by James Williams</p>
         <div class="project-tags"><span class="tag">Search</span> <span class="tag">Cards</span>
         </div>
-       </div>
-      </div>
-      <div class="project-card">
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a> <a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         ✍️
        </div>
@@ -414,9 +451,11 @@
         <p class="project-author">by Emma Davis</p>
         <div class="project-tags"><span class="tag">Forms</span> <span class="tag">Layout</span>
         </div>
-       </div>
-      </div>
-      <div class="project-card">
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a> <a href="https://web.dev" target="_blank" rel="noopener noreferrer" class="project-card">
        <div class="project-thumbnail">
         🎵
        </div>
@@ -425,8 +464,11 @@
         <p class="project-author">by David Kim</p>
         <div class="project-tags"><span class="tag">Audio</span> <span class="tag">Controls</span>
         </div>
-       </div>
-      </div>
+        <div class="project-link">
+         <svg class="link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+         </svg> View Project
+        </div>
+       </div></a>
      </div>
     </div>
     <div class="tab-content" id="content-submissions">
@@ -612,7 +654,7 @@
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', (e) => {
       const searchTerm = e.target.value.toLowerCase();
-      const projectCards = document.querySelectorAll('.project-card');
+      const projectCards = document.querySelectorAll('#gallery-grid .project-card');
 
       projectCards.forEach(card => {
         const title = card.querySelector('.project-title').textContent.toLowerCase();
@@ -636,5 +678,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4e6a8d7674fd6d',t:'MTc2NDIxMjg1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4e816dc5693dbd',t:'MTc2NDIxMzc5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
